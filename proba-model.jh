@@ -1,0 +1,32 @@
+entity Account {
+	name String required
+}
+
+entity Transaction {
+	date Date required
+    category String required
+    description String required
+}
+
+entity Turnover {
+	incommingAmount BigDecimal
+    outgoingAmount BigDecimal
+}
+
+relationship OneToMany {
+	Turnover{account} to Account
+    Turnover{transaction} to Transaction
+}
+
+// Set pagination options
+paginate Transaction with infinite-scroll
+paginate Account, Turnover with pagination
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
